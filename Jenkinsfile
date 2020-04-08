@@ -12,12 +12,6 @@ pipeline {
                 sh 'hadolint Dockerfile'
             }
         }
-        stage('Build') {
-            agent { dockerfile true }
-            steps {
-                echo 'Building!'
-            }
-        }
         stage('Linting python') {
             agent { dockerfile true }
             steps {
@@ -39,17 +33,31 @@ pipeline {
                 }
             }
         }     
+        stage('Build Image') {
+            agent { label 'master' }
+            steps {
+                echo 'Building...'
+                script {
+                    dockerImg = docker.build repository + ":$BUILD_NUMBER"
+                }
+            }
+        }
         stage('Deploy Image') {
             agent { label 'master' }
             steps {
                 echo 'Deploying...'
                 script {
-                    dockerImg = docker.build repository+":$BUILD_NUMBER"
                     docker.withRegistry( '', registryCredential) {
                         dockerImg.push()
                     }
-                    sh 'docker rmi $repository:$BUILD_NUMBER'
-                    }
+                }
+            }
+        }
+        stage('Removed docker image') {
+            agent { label 'master'}
+            steps {
+                echo 'Clearing up our mess..'
+                sh 'docker rmi $repository:$BUILD_NUMBER'
             }
         }
     }
