@@ -1,0 +1,14 @@
+[
+  {
+    "ParameterKey": "AvailabilityZones",
+    "ParameterValue": ["DevOpsEC2","",""]
+   },
+  {
+     "ParameterKey":"RemoteAccessCIDR",
+     "ParameterValue": "103.252.203.27"
+  },
+  {
+   "ParameterKey": "KeyPairName",
+   "ParameterValue": "DevOpsEC2"
+  }
+]
