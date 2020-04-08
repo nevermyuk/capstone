@@ -1,7 +1,9 @@
 pipeline {
     agent none
     environment {
-    DOCKER_IMAGE_NAME = "nevermyuk/capstone"
+            registry = "nevermyuk/capstone"
+            registryCredential = 'dockerhub'
+            dockerImg = ''
 	    }
     stages {    
         stage('Lint dockerfile') {
@@ -20,15 +22,39 @@ pipeline {
             agent { dockerfile true }
             steps {
                 echo 'Linting..'
-                sh 'pylint --disable=R,C,W1203,W1202 *.py'
+                sh 'pylint --disable=R,C,W1203,W1202 app/*.py'
 
             }
         }
-        stage('Deploy') {
-            agent any
+        stage('Test'){
+            agent { dockerfile true }
             steps {
-                echo 'Deploying....'
+                echo 'Testing...'
+            }
+            post {
+                always {
+                    echo 'Unit test....'
+                }
+            }
+        }     
+        stage('Deploy Image') {
+            agent { label 'master' }
+            steps {
+                echo 'Deploying...'
+                script {
+                    dockerImg =docker.build repo+":$BUILD_NUMBER"
+                    docker.withRegistry( '', registryCredential) {
+                        dockerImg.push()
+                    }
+                    sh 'docker rmi $repo:$BUILD_NUMBER'
+                    }
             }
         }
+        stage('Security Scan') {
+            agent any
+            steps { 
+                 aquaMicroscanner imageName: 'nevermyuk/capstone', notCompliesCmd: 'exit 1', onDisallowed: 'fail'
+              }
+         }  
     }
 }
