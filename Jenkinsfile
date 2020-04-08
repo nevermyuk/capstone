@@ -42,7 +42,7 @@ pipeline {
                 }
             }
         }
-        stage('Deploy Image') {
+        stage('Push Image to Dockerhub') {
             agent { label 'master' }
             steps {
                 echo 'Deploying...'
@@ -58,6 +58,25 @@ pipeline {
             steps {
                 echo 'Clearing up our mess..'
                 sh 'docker rmi $repository:$BUILD_NUMBER'
+            }
+        }
+        stage('Deploy -Blue') {
+            agent { label 'master' }
+            steps {
+                sh 'ls -l'
+                echo 'Deployed to blue!'
+            }
+        }
+        stage('Sanity Check'){
+            agent any
+            steps {
+                input "Does the blue container look okay? Is it time to push to green?"
+            }
+        }
+        stage('Deploy - Green') {
+            agent { label 'master' }
+            steps {
+                echo 'Deployed to green!'
             }
         }
     }
