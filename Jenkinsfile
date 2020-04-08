@@ -53,7 +53,7 @@ pipeline {
         stage('Security Scan') {
             agent any
             steps { 
-                 aquaMicroscanner imageName: 'nevermyuk/capstone', notCompliesCmd: 'exit 1', onDisallowed: 'fail'
+                 aquaMicroscanner imageName: 'nevermyuk/capstone', notCompliesCmd: 'exit 1', onDisallowed: 'fail', outputFormat: 'html'
               }
          }  
     }
