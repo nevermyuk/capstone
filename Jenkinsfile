@@ -60,10 +60,10 @@ pipeline {
                 sh 'docker rmi $repository:$BUILD_NUMBER'
             }
         }
-        stage('Deploy -Blue') {
+        stage('Deploy - Blue') {
             agent { label 'master' }
             steps {
-                sh 'ls -l'
+                sh 'kubectl apply -f ./blue/.'
                 echo 'Deployed to blue!'
             }
         }
@@ -76,6 +76,7 @@ pipeline {
         stage('Deploy - Green') {
             agent { label 'master' }
             steps {
+                sh 'kubectl apply -f ./green/.'
                 echo 'Deployed to green!'
             }
         }
