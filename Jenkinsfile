@@ -1,5 +1,5 @@
 pipeline {
-    agent
+    agent none
     environment {
     DOCKER_IMAGE_NAME = "nevermyuk/capstone"
 	    }
