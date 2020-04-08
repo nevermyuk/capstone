@@ -1,16 +1,17 @@
-apiVersion: v1
-kind: ReplicationController
+---
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: blue
-  labels:
+  labels: 
     app: blue
 spec:
-  replicas: 1
   selector:
-    app: blue
+    matchLabels:
+      app: blue
+  replicas: 1
   template:
     metadata:
-      name: blue
       labels:
         app: blue
     spec:
