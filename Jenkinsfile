@@ -1,7 +1,7 @@
 pipeline {
     agent none
     environment {
-            registry = "nevermyuk/capstone"
+            repository = "nevermyuk/capstone"
             registryCredential = 'dockerhub'
             dockerImg = ''
 	    }
@@ -22,8 +22,10 @@ pipeline {
             agent { dockerfile true }
             steps {
                 echo 'Linting..'
-                sh 'pylint --disable=R,C,W1203,W1202 app/*.py'
-
+                withEnv(['PYLINTHOME=.']) {
+                    //sh 'pylint --disable=R,C,W1203,W1202 app/*.py'
+                    sh "pylint --disable=R,C,W1203,W1202 --output-format=parseable --reports=no app/*.py"
+                }
             }
         }
         stage('Test'){
@@ -42,11 +44,11 @@ pipeline {
             steps {
                 echo 'Deploying...'
                 script {
-                    dockerImg =docker.build repo+":$BUILD_NUMBER"
+                    dockerImg = docker.build repository+":$BUILD_NUMBER"
                     docker.withRegistry( '', registryCredential) {
                         dockerImg.push()
                     }
-                    sh 'docker rmi $repo:$BUILD_NUMBER'
+                    sh 'docker rmi $repository:$BUILD_NUMBER'
                     }
             }
         }
