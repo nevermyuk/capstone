@@ -61,4 +61,5 @@ pipeline {
                 sh 'docker rmi $repository:$BUILD_NUMBER'
             }
         }
+    }
 }
