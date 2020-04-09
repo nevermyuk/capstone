@@ -69,9 +69,8 @@ pipeline {
         stage('Deploy - Green') {
             agent { label 'master' }
             steps {
-                sh 'kubectl apply -f ./green/.'
-                echo 'Deployed to Green!'
+                build job: 'eks-green'
             }
-        }
+        }  
     }
 }
