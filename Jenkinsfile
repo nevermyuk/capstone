@@ -66,11 +66,11 @@ pipeline {
                 input "Does the blue container look okay? Is it time to push to green?"
             }
         }
-        stage('Deploy - Blue') {
+        stage('Deploy - Green') {
             agent { label 'master' }
             steps {
-                sh 'kubectl apply -f ./blue/bluedeployment.yaml'
-                echo 'Deployed to blue!'
+                sh 'kubectl apply -f ./green/.'
+                echo 'Deployed to Green!'
             }
         }
     }

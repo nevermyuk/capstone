@@ -2,22 +2,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: blue
+  name: green
   labels: 
-    app: blue
+    app: green
 spec:
   selector:
     matchLabels:
-      app: blue
+      app: green
   replicas: 1
   template:
     metadata:
       labels:
-        app: blue
+        app: green
     spec:
       containers:
-      - name: blue
-        image: nevermyuk/capstone
+      - name: green
+        image: nevermyuk/capstone:latest
         ports:
         - containerPort: 80
           name: http-server

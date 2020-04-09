@@ -6,7 +6,7 @@ metadata:
     app: capstone-bg-lb
 spec:
   selector:
-    app: blue
+    app: green
   ports:
   - port: 8000
     targetPort: 80
