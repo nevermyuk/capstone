@@ -1,0 +1,30 @@
+[
+  {
+     "ParameterKey":"ClusterName",
+     "ParameterValue": "eks-demo-Cluster"
+  },
+  {
+    "ParameterKey":"KeyName",
+    "ParameterValue": "pipeline"
+  },
+  {
+    "ParameterKey":"ClusterStack",
+    "ParameterValue": "eks-demo"
+  },
+  {
+    "ParameterKey":"NodeGroupName",
+    "ParameterValue": "Node"
+  },
+  {
+    "ParameterKey":"NodeImageId",
+    "ParameterValue": "ami-0ff367de8253131b9"
+  },
+  {
+    "ParameterKey":"NodeInstanceType",
+    "ParameterValue": "t2.small"
+  },
+  {
+    "ParameterKey":"NodeVolumeSize",
+    "ParameterValue": "8"
+  }
+]

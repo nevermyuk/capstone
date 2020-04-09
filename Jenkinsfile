@@ -49,7 +49,7 @@ pipeline {
                 script {
                     docker.withRegistry( '', registryCredential) {
                         dockerImg.push("")
-                        dockerImg.push("latest")
+                        dockerImg.push("development")
                     }
                 }
             }
