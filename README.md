@@ -1,6 +1,5 @@
 ## Project Overview
-
-
+This is the master branch
 
 ### Project Tasks
 
@@ -27,3 +26,9 @@ aws eks create-cluster \
 ```
 
 [Create Kubeconfig](https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html)
+
+
+
+[Creation of EKS](https://logz.io/blog/amazon-eks-cluster/)
+
+[EKS AMI](https://docs.aws.amazon.com/eks/latest/userguide/gpu-ami.html)
