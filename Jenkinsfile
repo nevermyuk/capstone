@@ -63,7 +63,7 @@ pipeline {
         stage('Sanity Check'){
             agent any
             steps {
-                input "Does the blue container look okay? Is it time to push to green?"
+                input "Does the development container look okay? Is it time to push to blue?"
             }
         }
         stage('Deploy - Blue') {
