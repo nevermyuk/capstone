@@ -60,24 +60,17 @@ pipeline {
                 sh 'docker rmi $repository:$BUILD_NUMBER'
             }
         }
-        stage('Deploy - Blue') {
-            agent { label 'master' }
-            steps {
-                sh 'kubectl apply -f ./blue/.'
-                echo 'Deployed to blue!'
-            }
-        }
         stage('Sanity Check'){
             agent any
             steps {
                 input "Does the blue container look okay? Is it time to push to green?"
             }
         }
-        stage('Deploy - Green') {
+        stage('Deploy - Blue') {
             agent { label 'master' }
             steps {
-                sh 'kubectl apply -f ./green/.'
-                echo 'Deployed to green!'
+                sh 'kubectl apply -f ./blue/bluedeployment.yaml'
+                echo 'Deployed to blue!'
             }
         }
     }
