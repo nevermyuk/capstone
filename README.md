@@ -1,11 +1,4 @@
-<include a CircleCI status badge, here>
+# Project Overview
 
-## Project Overview
-
-
-
-### Project Tasks
-
-
----
-
+- Creating a Blue Green Deployment with Jenkins
+- Containerized Application Deployed with K8s.
