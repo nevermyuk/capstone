@@ -1,5 +1,5 @@
 FROM python:3.7.3-stretch
-MAKE IT FAIL TOO!
+
 ## Step 1:
 # Create a working directory
 WORKDIR /app

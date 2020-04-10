@@ -5,7 +5,6 @@ app = Flask(__name__)
 def hello():
     return "Hello World from Ze Quan. This is Blue."
 
-MAKEITFAIL!
 
 if __name__ == "__main__":
     # Only for debugging while developing
