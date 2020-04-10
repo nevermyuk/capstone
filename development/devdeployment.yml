@@ -21,4 +21,5 @@
           ports:
           - containerPort: 80
             name: http-server
-        nodeSelector: dev
+        nodeSelector: 
+          type: dev
