@@ -17,7 +17,7 @@
       spec:
         containers:
         - name: dev
-          image: nevermyuk/capstone
+          image: nevermyuk/capstone:development
           ports:
           - containerPort: 80
             name: http-server
