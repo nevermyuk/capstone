@@ -5,8 +5,20 @@ metadata:
   namespace: kube-system
 data:
   mapRoles: |
-    - rolearn: arn:aws:iam::1234563851:role/eks-demo-example-NodeInstanceRole-1EXAMPLE
+    - rolearn: arn:aws:iam::284171673851:role/eks-demo-dev-NodeInstanceRole-1WJFID38N9RMH
       username: system:node:{{EC2PrivateDNSName}}
       groups:
         - system:bootstrappers
         - system:nodes
+    - rolearn: arn:aws:iam::284171673851:role/eks-demo-green-NodeInstanceRole-O1US7HOV0LG5
+      username: system:node:{{EC2PrivateDNSName}}
+      groups:
+        - system:bootstrappers
+        - system:nodes
+    - rolearn: arn:aws:iam::284171673851:role/eks-demo-blue-NodeInstanceRole-1N3WKWF3N63PU
+      username: system:node:{{EC2PrivateDNSName}}
+      groups:
+        - system:bootstrappers
+        - system:nodes
+  
+

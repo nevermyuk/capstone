@@ -128,6 +128,7 @@ Resources:
             Ref: AWS::Region
       CidrBlock:
         Ref: Subnet01Block
+      MapPublicIpOnLaunch: true
       VpcId:
         Ref: VPC
       Tags:
@@ -146,6 +147,7 @@ Resources:
             Ref: AWS::Region
       CidrBlock:
         Ref: Subnet02Block
+      MapPublicIpOnLaunch: true
       VpcId:
         Ref: VPC
       Tags:
@@ -165,6 +167,7 @@ Resources:
             Ref: AWS::Region
       CidrBlock:
         Ref: Subnet03Block
+      MapPublicIpOnLaunch: true
       VpcId:
         Ref: VPC
       Tags:
