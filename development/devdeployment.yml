@@ -1,0 +1,23 @@
+---
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: dev
+    labels: 
+      app: dev
+  spec:
+    selector:
+      matchLabels:
+        app: dev
+    replicas: 1
+    template:
+      metadata:
+        labels:
+          app: dev
+      spec:
+        containers:
+        - name: dev
+          image: nevermyuk/capstone
+          ports:
+          - containerPort: 80
+            name: http-server

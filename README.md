@@ -1,7 +1,5 @@
 ## Project Overview
-This is the master branch
-
-### Project Tasks
+This is the Dev Branch
 
 ---
 
@@ -26,8 +24,6 @@ aws eks create-cluster \
 ```
 
 [Create Kubeconfig](https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html)
-
-
 
 [Creation of EKS](https://logz.io/blog/amazon-eks-cluster/)
 

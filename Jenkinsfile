@@ -17,7 +17,6 @@ pipeline {
             steps {
                 echo 'Linting..'
                 withEnv(['PYLINTHOME=.']) {
-                    //sh 'pylint --disable=R,C,W1203,W1202 app/*.py'
                     sh "pylint --disable=R,C,W1203,W1202 --output-format=parseable --reports=no app/*.py"
                 }
             }
@@ -52,6 +51,18 @@ pipeline {
                         dockerImg.push("development")
                     }
                 }
+            }
+        }
+        stage('Security Scan') {
+            agent { label 'master' }
+            steps {
+                aquaMicroscanner imageName: 'nevermyuk/capstone', notCompliesCmd: 'exit 4', onDisallowed: 'ignore', outputFormat: 'html'
+            }
+        }
+        stage('Deploy - Development') {
+            agent { label 'master' }
+            steps {
+                build job: 'eks-dev'
             }
         }
         stage('Removed docker image') {
