@@ -48,9 +48,16 @@ pipeline {
                 echo 'Deploying...'
                 script {
                     docker.withRegistry( '', registryCredential) {
+                        dockerImg.push()
                         dockerImg.push("latest")
                     }
                 }
+            }
+        }
+        stage('Security Scan') {
+            agent { label 'master' }
+            steps {
+                aquaMicroscanner imageName: 'nevermyuk/capstone', notCompliesCmd: 'exit 4', onDisallowed: 'ignore', outputFormat: 'html'
             }
         }
         stage('Removed docker image') {
@@ -60,7 +67,7 @@ pipeline {
                 sh 'docker rmi $repository:$BUILD_NUMBER'
             }
         }
-        stage('Sanity Check'){
+        stage('Sanity Check Blue'){
             agent any
             steps {
                 input "Does the development container look okay? Is it time to push to blue?"
@@ -72,7 +79,6 @@ pipeline {
             steps {
                 build job: 'eks-blue'
             }
-    
         }   
     }
 }
