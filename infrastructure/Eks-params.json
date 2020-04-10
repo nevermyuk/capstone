@@ -13,7 +13,7 @@
   },
   {
     "ParameterKey":"NodeGroupName",
-    "ParameterValue": "Node"
+    "ParameterValue": "dev"
   },
   {
     "ParameterKey":"NodeImageId",
@@ -26,5 +26,9 @@
   {
     "ParameterKey":"NodeVolumeSize",
     "ParameterValue": "8"
+  },
+  {
+    "ParameterKey":"BootstrapArguments",
+    "ParameterValue": "--kubelet-extra-args --node-labels=type=dev"
   }
 ]

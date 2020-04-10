@@ -15,7 +15,7 @@ Inside the infrastructure folder there is shell scripts and CloudFormation templ
 
 ```bash
 # Usage
-./create-vpc.sh STACK_NAME 
+./create-cluster.sh STACK_NAME 
 ```
 
 **Important : CloudFormation Stack must be CREATE_COMPLETE before the next step**
@@ -48,14 +48,46 @@ Inside the infrastructure folder there is shell scripts and CloudFormation templ
 - NodeVolumeSize - Volume size for EBS in **GB**
   - e.g : `8` 
 
+- **IMPORTANT** : BootstrapArguments:
+  - For additional arguments, useful for tagging, labelling, etc.
+  - e.g: `--kubelet-extra-args --node-labels=type=blue`
+  - **Add labels for selection of nodes to deploy into.**
+  - [For more info](https://github.com/awslabs/amazon-eks-ami/blob/master/files/bootstrap.sh)
+
 ```bash
 # Usage
-./create-vpc.sh STACK_NAME 
+./create-node.sh STACK_NAME 
 ```
 
 ### Step 3
 
 **Wait for NodeGroup Stack to be CREATE_COMPLETE**
+
+- Add Node group to Cluster using the following steps
+
+  ```yaml
+  #aws-auth-cm.yaml
+  apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    name: aws-auth
+    namespace: kube-system
+  data:
+    mapRoles: |
+      - rolearn: <ARN of instance role (not instance profile)>
+        username: system:node:{{EC2PrivateDNSName}}
+        groups:
+          - system:bootstrappers
+          - system:nodes
+  ```
+
+- To apply the config to cluster.
+
+  ```bash
+  kubectl apply -f aws-auth-cm.yaml
+  ```
+
+- [For detailed info](https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html)
 
 
 
