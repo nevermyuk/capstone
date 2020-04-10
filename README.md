@@ -1,5 +1,63 @@
 ## Project Overview
-This is the Dev Branch
+This is the development branch.
+
+This includes CloudFormation templates to provision a Cluster in a Public Subnet and a Nodegroup.
+
+## Provision Infrastructure
+
+Inside the infrastructure folder there is shell scripts and CloudFormation templates for provisioning your clusters.
+
+### Step 1
+
+`create-cluster.sh` for creating a cluster.
+
+- Script uses Eks-starter.yml
+
+```bash
+# Usage
+./create-vpc.sh STACK_NAME 
+```
+
+**Important : CloudFormation Stack must be CREATE_COMPLETE before the next step**
+
+### Step 2
+
+`create-vpc.sh` for adding node group into the cluster.
+
+- Script uses Eks-nodes.yml and Eks-params.json
+
+**Important: Modify Eks-params.json with outputs in Step 1.**
+
+#### **Required Parameters**: 
+
+- ClusterStack - CloudFormation Stack Name in Step 1
+  - e.g  : `eks-demo`
+
+- ClusterName - CloudFormation Stack Name with - Cluster appended.
+  - e.g : `eks-demo-Cluster`
+- Keyname - EC2 Key Pair name. **EC2 Key Pair Must be created and available.  **
+  - For SSH access into the node instance.
+  - e.g : `eks-demo-key`
+- NodeGroupName - Name for Node Group
+  - e.g : `NodeGroup-1`
+- NodeImageID - Provide AWS Optimized EKS Image ID for your region
+  - e.g : `ami-0ff367de8253131b9` for Singapore.
+  - [Click here for how to find AMI ID for your region](https://docs.aws.amazon.com/eks/latest/userguide/retrieve-ami-id.html)
+- NodeInstanceType - Instance size.
+  - e.g : `t2.small`
+- NodeVolumeSize - Volume size for EBS in **GB**
+  - e.g : `8` 
+
+```bash
+# Usage
+./create-vpc.sh STACK_NAME 
+```
+
+### Step 3
+
+**Wait for NodeGroup Stack to be CREATE_COMPLETE**
+
+
 
 ---
 
@@ -7,13 +65,13 @@ This is the Dev Branch
 
 Validating Jenkinsfile
 
-```
+```bash
 curl --user username:password -X POST -F "jenkinsfile=<Jenkinsfile" http://jenkins-url:8080/pipeline-model-converter/validate]()
 ```
 
 [Creating EKS CLUSTER](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html)
 
-```
+```bash
 aws eks create-cluster \
 --name capstone \
 --node-type t2.micro \

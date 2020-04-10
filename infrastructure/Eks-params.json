@@ -1,15 +1,15 @@
 [
   {
+    "ParameterKey":"ClusterStack",
+    "ParameterValue": "eks-demo"
+  },
+  {
      "ParameterKey":"ClusterName",
      "ParameterValue": "eks-demo-Cluster"
   },
   {
     "ParameterKey":"KeyName",
     "ParameterValue": "pipeline"
-  },
-  {
-    "ParameterKey":"ClusterStack",
-    "ParameterValue": "eks-demo"
   },
   {
     "ParameterKey":"NodeGroupName",
