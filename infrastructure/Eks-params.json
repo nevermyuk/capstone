@@ -13,7 +13,7 @@
   },
   {
     "ParameterKey":"NodeGroupName",
-    "ParameterValue": "dev"
+    "ParameterValue": "green"
   },
   {
     "ParameterKey":"NodeImageId",
@@ -29,6 +29,6 @@
   },
   {
     "ParameterKey":"BootstrapArguments",
-    "ParameterValue": "--kubelet-extra-args --node-labels=type=dev"
+    "ParameterValue": "--kubelet-extra-args --node-labels=type=green"
   }
 ]
