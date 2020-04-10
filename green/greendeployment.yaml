@@ -17,7 +17,8 @@ spec:
     spec:
       containers:
       - name: green
-        image: nevermyuk/capstone:latest
+        image: nevermyuk/capstone
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
           name: http-server
