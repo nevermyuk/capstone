@@ -21,4 +21,5 @@ spec:
         ports:
         - containerPort: 80
           name: http-server
-      nodeSelector: blue
+      nodeSelector:
+        type: blue
