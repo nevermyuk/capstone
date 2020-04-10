@@ -65,6 +65,8 @@ Inside the infrastructure folder there is shell scripts and CloudFormation templ
 
 - Add Node group to Cluster using the following steps
 
+- Add more roles depending on how many node groups as shown.
+
   ```yaml
   #aws-auth-cm.yaml
   apiVersion: v1
@@ -74,11 +76,22 @@ Inside the infrastructure folder there is shell scripts and CloudFormation templ
     namespace: kube-system
   data:
     mapRoles: |
-      - rolearn: <ARN of instance role (not instance profile)>
+      - rolearn: <ARN of instance role (not instance profile)> OF FIRST NODE GROUP
         username: system:node:{{EC2PrivateDNSName}}
         groups:
           - system:bootstrappers
           - system:nodes
+      - rolearn: <ARN of instance role (not instance profile)> OF SECOND NODE GROUP
+        username: system:node:{{EC2PrivateDNSName}}
+        groups:
+          - system:bootstrappers
+          - system:nodes
+      - rolearn: <ARN of instance role (not instance profile)> OF THIRD NODE GROUP
+        username: system:node:{{EC2PrivateDNSName}}
+        groups:
+          - system:bootstrappers
+          - system:nodes
+      
   ```
 
 - To apply the config to cluster.
